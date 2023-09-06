@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'tl-login',
@@ -32,7 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent {
   loginForm!: FormGroup;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -57,6 +58,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
+    this.authService.login(this.loginForm.value);
   }
 }
