@@ -42,4 +42,15 @@ export class AuthService {
         }
       });
   }
+
+  logout() {
+    this.http
+      .delete<CommonResponse>(`${environment.baseUrl}/auth/login`, this.option)
+      .subscribe(res => {
+        if (res.resultCode === ResultCode.success) {
+          this.isLoggedIn.next(false);
+          this.router.navigate(['/login']);
+        }
+      });
+  }
 }
