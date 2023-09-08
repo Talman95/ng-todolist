@@ -4,3 +4,9 @@ export interface LoginData {
   rememberMe?: boolean;
   captcha?: boolean;
 }
+
+export interface MeResponse {
+  id: number;
+  email: string;
+  login: string;
+}
