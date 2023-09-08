@@ -14,13 +14,6 @@ export class AuthService {
   private isLoggedIn = new BehaviorSubject(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
-  option = {
-    withCredentials: true,
-    headers: {
-      'API-KEY': environment.apiKey,
-    },
-  };
-
   constructor(
     private http: HttpClient,
     private router: Router
@@ -28,29 +21,23 @@ export class AuthService {
 
   login(loginData: LoginData) {
     this.http
-      .post<CommonResponse<{ userId: number }>>(
-        `${environment.baseUrl}/auth/login`,
-        {
-          ...loginData,
-        },
-        this.option
-      )
+      .post<CommonResponse<{ userId: number }>>(`${environment.baseUrl}/auth/login`, {
+        ...loginData,
+      })
       .subscribe(res => {
         if (res.resultCode === ResultCode.success) {
           this.isLoggedIn.next(true);
-          this.router.navigate(['/todo']);
+          this.router.navigate(['/todos']);
         }
       });
   }
 
   logout() {
-    this.http
-      .delete<CommonResponse>(`${environment.baseUrl}/auth/login`, this.option)
-      .subscribe(res => {
-        if (res.resultCode === ResultCode.success) {
-          this.isLoggedIn.next(false);
-          this.router.navigate(['/login']);
-        }
-      });
+    this.http.delete<CommonResponse>(`${environment.baseUrl}/auth/login`).subscribe(res => {
+      if (res.resultCode === ResultCode.success) {
+        this.isLoggedIn.next(false);
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }

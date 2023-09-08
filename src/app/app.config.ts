@@ -2,8 +2,13 @@ import { ApplicationConfig } from '@angular/core';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { credsInterceptor } from './core/interceptors/creds.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideNoopAnimations(), provideRouter(routes), provideHttpClient()],
+  providers: [
+    provideNoopAnimations(),
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([credsInterceptor])),
+  ],
 };
