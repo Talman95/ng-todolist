@@ -5,19 +5,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Observable } from 'rxjs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'tl-header',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatProgressBarModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  isLoggedIn!: Observable<boolean>;
+  isLoggedIn$!: Observable<boolean>;
+  isLoading$!: Observable<boolean>;
 
-  constructor(private authService: AuthService) {
-    this.isLoggedIn = this.authService.isLoggedIn$;
+  constructor(
+    private authService: AuthService,
+    private loadingService: LoadingService
+  ) {
+    this.isLoggedIn$ = this.authService.isLoggedIn$;
+    this.isLoading$ = this.loadingService.isLoading$;
   }
 
   logout() {

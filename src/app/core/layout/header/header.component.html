@@ -1,12 +1,13 @@
-<header>
+<header class="header">
   <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon">
       <mat-icon>menu</mat-icon>
     </button>
     <h1>Todolist</h1>
     <span class="example-spacer"></span>
-    <button *ngIf="isLoggedIn | async" (click)="logout()" mat-icon-button class="example-icon">
+    <button *ngIf="isLoggedIn$ | async" (click)="logout()" mat-icon-button class="example-icon">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
 </header>
