@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { CommonResponse } from './../models/common-response.model';
 import { ResultCode } from '../enums/result-code.enum';
 import { BehaviorSubject, Observable, map, tap } from 'rxjs';
+import { NotifyService } from './notify.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private notifyService: NotifyService
   ) {}
 
   me(): Observable<boolean | UrlTree> {
@@ -40,6 +42,8 @@ export class AuthService {
         if (res.resultCode === ResultCode.success) {
           this.isLoggedIn.next(true);
           this.router.navigate(['/todos']);
+        } else {
+          this.notifyService.showError(res.messages[0]);
         }
       });
   }
@@ -49,6 +53,8 @@ export class AuthService {
       if (res.resultCode === ResultCode.success) {
         this.isLoggedIn.next(false);
         this.router.navigate(['/login']);
+      } else {
+        this.notifyService.showError(res.messages[0]);
       }
     });
   }
