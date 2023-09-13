@@ -1,0 +1,21 @@
+.todos-page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-item {
+  align-self: center;
+  margin: 50px 0;
+}
+
+.todos-slider {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  column-gap: 20px;
+  height: calc(100vh - 164px);
+  overflow-x: scroll;
+  padding: 0 20px;
+}
