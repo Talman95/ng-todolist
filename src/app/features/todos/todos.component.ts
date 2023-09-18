@@ -4,16 +4,18 @@ import { TodosService } from 'src/app/core/services/todos.service';
 import { Todo } from 'src/app/core/models/todos.model';
 import { Observable } from 'rxjs';
 import { TodoComponent } from './todo/todo.component';
+import { AddItemComponent } from 'src/app/shared/add-item/add-item.component';
 
 @Component({
   selector: 'tl-todos',
   standalone: true,
-  imports: [CommonModule, TodoComponent],
+  imports: [CommonModule, TodoComponent, AddItemComponent],
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss'],
 })
 export class TodosComponent implements OnInit {
   todos$!: Observable<Todo[]>;
+  title = '';
 
   constructor(private todosService: TodosService) {}
 
@@ -21,5 +23,9 @@ export class TodosComponent implements OnInit {
     this.todos$ = this.todosService.todos$;
 
     this.todosService.getTodos();
+  }
+
+  addItemHandler(title: string) {
+    this.todosService.addTodo(title);
   }
 }

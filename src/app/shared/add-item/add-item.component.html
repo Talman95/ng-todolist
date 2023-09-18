@@ -1,0 +1,12 @@
+<div class="add-item">
+  <mat-form-field class="example-full-width">
+    <input
+      matInput
+      placeholder="Enter the text"
+      [(ngModel)]="title"
+      (keydown.enter)="onEnterPress()" />
+  </mat-form-field>
+  <button mat-icon-button color="primary" (click)="addItemHandler()">
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</div>

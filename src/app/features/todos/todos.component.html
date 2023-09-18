@@ -1,7 +1,6 @@
 <div class="todos-page">
   <div class="add-item">
-    <input value="" type="text" />
-    <button>+</button>
+    <tl-add-item (addItem)="addItemHandler($event)" [title]="title"></tl-add-item>
   </div>
 
   <div class="todos-slider">
