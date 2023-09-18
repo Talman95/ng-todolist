@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Todo } from '../models/todos.model';
+import { Todo } from '../models/todo.model';
 import { CommonResponse } from '../models/common-response.model';
 import { ResultCode } from '../enums/result-code.enum';
 import { NotifyService } from './notify.service';
@@ -36,6 +36,21 @@ export class TodosService {
           const updatedTodos = this.todos.getValue();
 
           this.todos.next([newTodo, ...updatedTodos]);
+        } else {
+          this.notifyService.showError(res.messages[0]);
+        }
+      });
+  }
+
+  removeTodo(todoId: string) {
+    this.http
+      .delete<CommonResponse>(`${environment.baseUrl}/todo-lists/${todoId}`)
+      .subscribe(res => {
+        if (res.resultCode === ResultCode.success) {
+          const todos = this.todos.getValue();
+          const filteredTodos = todos.filter(tl => tl.id !== todoId);
+
+          this.todos.next(filteredTodos);
         } else {
           this.notifyService.showError(res.messages[0]);
         }

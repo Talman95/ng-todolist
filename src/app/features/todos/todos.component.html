@@ -1,9 +1,12 @@
 <div class="todos-page">
   <div class="add-item">
-    <tl-add-item (addItem)="addItemHandler($event)" [title]="title"></tl-add-item>
+    <tl-add-item (addItem)="addTodoHandler($event)" [title]="title"></tl-add-item>
   </div>
 
   <div class="todos-slider">
-    <tl-todo *ngFor="let todo of todos$ | async" [todo]="todo"></tl-todo>
+    <tl-todo
+      *ngFor="let todo of todos$ | async"
+      [todo]="todo"
+      (removeTodo)="removeTodo($event)"></tl-todo>
   </div>
 </div>
