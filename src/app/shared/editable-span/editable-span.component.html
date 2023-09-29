@@ -1,0 +1,14 @@
+<div class="editable-span">
+  <input
+    *ngIf="isEditMode; else span"
+    #myInput
+    matInput
+    placeholder="Enter text"
+    [(ngModel)]="editableTitle"
+    (blur)="updateTitleHandler()"
+    (keydown.enter)="onEnterPress()" />
+
+  <ng-template #span>
+    <span (dblclick)="startEditMode()">{{ title }}</span>
+  </ng-template>
+</div>

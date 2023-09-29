@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Todo } from '../models/todo.model';
 import { CommonResponse } from '../models/common-response.model';
@@ -54,6 +54,22 @@ export class TodosService {
         } else {
           this.notifyService.showError(res.messages[0]);
         }
+      });
+  }
+
+  updateTodo(todoId: string, title: string) {
+    this.http
+      .put<CommonResponse>(`${environment.baseUrl}/todo-lists/${todoId}`, { title })
+      .pipe(
+        map(() => {
+          const todos = this.todos.getValue();
+          const updatedTodos = todos.map(tl => (tl.id === todoId ? { ...tl, title } : tl));
+
+          return updatedTodos;
+        })
+      )
+      .subscribe(todos => {
+        this.todos.next(todos);
       });
   }
 }
