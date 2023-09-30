@@ -1,0 +1,5 @@
+<mat-button-toggle-group [value]="filter$ | async" (change)="onChangeFilter($event)">
+  <mat-button-toggle value="{{ todoFilter.Active }}">Active</mat-button-toggle>
+  <mat-button-toggle value="{{ todoFilter.Completed }}">Completed</mat-button-toggle>
+  <mat-button-toggle value="{{ todoFilter.All }}">All</mat-button-toggle>
+</mat-button-toggle-group>

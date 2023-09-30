@@ -1,8 +1,10 @@
+import { TaskStatus } from '../enums/task-status.enum';
+
 export interface Task {
   description: string;
   title: string;
   completed: boolean;
-  status: number;
+  status: TaskStatus;
   priority: number;
   startDate: number;
   deadline: number;

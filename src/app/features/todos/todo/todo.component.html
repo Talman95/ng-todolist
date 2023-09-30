@@ -9,8 +9,11 @@
         [title]="todo.title"
         (updateTitle)="updateTitleHandler($event)"></tl-editable-span>
     </mat-card-header>
+
     <mat-card-content>
       <tl-tasks [tasks$]="tasks$"></tl-tasks>
     </mat-card-content>
+
+    <tl-todo-filter [filter$]="filter$" (changeFilter)="onChangeFilter($event)"></tl-todo-filter>
   </mat-card>
 </article>
