@@ -13,6 +13,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TodoFilter } from 'src/app/core/enums/todo-filter.enum';
 import { TaskStatus } from 'src/app/core/enums/task-status.enum';
 import { TodoFilterComponent } from './todo-filter/todo-filter.component';
+import { AddItemComponent } from 'src/app/shared/add-item/add-item.component';
 
 @Component({
   selector: 'tl-todo',
@@ -27,6 +28,7 @@ import { TodoFilterComponent } from './todo-filter/todo-filter.component';
     EditableSpanComponent,
     TasksComponent,
     TodoFilterComponent,
+    AddItemComponent,
   ],
 })
 export class TodoComponent implements OnInit {
@@ -74,5 +76,9 @@ export class TodoComponent implements OnInit {
 
   onChangeFilter(filter: TodoFilter) {
     this.filter.next(filter);
+  }
+
+  addTaskHandler(title: string) {
+    this.tasksService.addTask(this.todo.id, title);
   }
 }
