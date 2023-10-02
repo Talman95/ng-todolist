@@ -52,4 +52,22 @@ export class TasksService {
         }
       });
   }
+
+  removeTask(todoId: string, taskId: string) {
+    this.http
+      .delete<CommonResponse>(`${environment.baseUrl}/todo-lists/${todoId}/tasks/${taskId}`)
+      .subscribe(res => {
+        if (res.resultCode === ResultCode.success) {
+          const stateTasks = this.tasks.getValue();
+
+          const tasks = stateTasks[todoId];
+
+          stateTasks[todoId] = tasks.filter(task => task.id !== taskId);
+
+          this.tasks.next(stateTasks);
+        } else {
+          this.notifyService.showError(res.messages[0]);
+        }
+      });
+  }
 }

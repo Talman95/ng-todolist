@@ -12,7 +12,7 @@
 
     <mat-card-content>
       <tl-add-item [title]="''" (addItem)="addTaskHandler($event)"></tl-add-item>
-      <tl-tasks [tasks$]="tasks$"></tl-tasks>
+      <tl-tasks [tasks$]="tasks$" [todoId]="todo.id"></tl-tasks>
     </mat-card-content>
 
     <tl-todo-filter [filter$]="filter$" (changeFilter)="onChangeFilter($event)"></tl-todo-filter>

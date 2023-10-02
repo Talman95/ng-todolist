@@ -1,3 +1,6 @@
 <ul>
-  <li *ngFor="let task of tasks$ | async">{{ task.title }}</li>
+  <tl-task
+    *ngFor="let task of tasks$ | async"
+    [task]="task"
+    (removeTask)="removeTaskHandler($event)"></tl-task>
 </ul>
