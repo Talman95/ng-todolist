@@ -1,5 +1,13 @@
-<li>
-  <input type="checkbox" />
-  {{ task.title }}
-  <button (click)="removeTaskHandler()">X</button>
+<li class="task">
+  <mat-checkbox
+    class="task__status"
+    [checked]="task.status === taskStatus.Completed"
+    [color]="'primary'"
+    (change)="statusChangeHandler($event.checked)" />
+  <tl-editable-span
+    [title]="task.title"
+    (updateTitle)="updateTitleHandler($event)"></tl-editable-span>
+  <button mat-icon-button color="primary" (click)="removeTaskHandler()">
+    <mat-icon>close</mat-icon>
+  </button>
 </li>

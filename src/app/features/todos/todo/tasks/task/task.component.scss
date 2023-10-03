@@ -1,0 +1,9 @@
+.task {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &__status {
+        margin-right: 10px;
+    }
+}
