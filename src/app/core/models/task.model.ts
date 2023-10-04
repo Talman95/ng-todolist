@@ -23,3 +23,13 @@ export interface GetTaskResponse {
   totalCount: number;
   error: string[];
 }
+
+export interface UpdateTask {
+  description: string;
+  title: string;
+  completed: boolean;
+  status: TaskStatus;
+  priority: number;
+  startDate: number;
+  deadline: number;
+}

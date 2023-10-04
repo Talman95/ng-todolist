@@ -1,3 +1,4 @@
+import { TaskStatus } from 'src/app/core/enums/task-status.enum';
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from 'src/app/core/models/task.model';
@@ -20,5 +21,13 @@ export class TasksComponent {
 
   removeTaskHandler(taskId: string) {
     this.tasksService.removeTask(this.todoId, taskId);
+  }
+
+  updateTitleHandler({ taskId, title }: { taskId: string; title: string }) {
+    this.tasksService.updateTask(this.todoId, taskId, { title });
+  }
+
+  changeStatusHandler({ taskId, status }: { taskId: string; status: TaskStatus }) {
+    this.tasksService.updateTask(this.todoId, taskId, { status });
   }
 }

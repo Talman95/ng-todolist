@@ -2,5 +2,7 @@
   <tl-task
     *ngFor="let task of tasks$ | async"
     [task]="task"
-    (removeTask)="removeTaskHandler($event)"></tl-task>
+    (removeTask)="removeTaskHandler($event)"
+    (updateTitle)="updateTitleHandler($event)"
+    (statusChange)="changeStatusHandler($event)"></tl-task>
 </ul>
